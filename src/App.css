@@ -1,414 +1,100 @@
-/* ===========================
-   Genel Sıfırlama ve Temel
-   =========================== */
+/* Uygulama-6: Temel CSS ile Stil Ver */
+
+/* Genel sifirlama */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-:root {
-  --color-primary: #1E3A8A;
-  --color-primary-light: #3B82F6;
-  --color-accent: #2563EB;
-  --color-bg: #f8fafc;
-  --color-surface: #ffffff;
-  --color-text: #1e293b;
-  --color-text-muted: #64748b;
-  --color-border: #e2e8f0;
-  --color-error: #dc2626;
-  --color-success: #16a34a;
-  --radius: 8px;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
 body {
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: system-ui, sans-serif;
   line-height: 1.6;
-  color: var(--color-text);
-  background-color: var(--color-bg);
-  min-height: 100vh;
-}
-
-#root {
-  max-width: 960px;
+  padding: 2rem;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 0;
 }
 
-/* ===========================
-   Focus Göstergesi — ASLA kaldırma!
-   =========================== */
-:focus {
-  outline: 3px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
-:focus:not(:focus-visible) {
-  outline: none;
-}
-
-:focus-visible {
-  outline: 3px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
-/* ===========================
-   Skip Link (İçeriğe Atla)
-   =========================== */
+/* Skip link: normalde gizli, Tab ile gorunur */
 .skip-link {
   position: absolute;
   top: -100px;
   left: 0;
-  background: var(--color-primary);
-  color: #ffffff;
-  padding: 12px 24px;
-  z-index: 1000;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 0 0 var(--radius) 0;
-  transition: top 0.2s ease;
+  background: #1E3A8A;
+  color: white;
+  padding: 8px 16px;
+  z-index: 100;
 }
 
 .skip-link:focus {
   top: 0;
 }
 
-/* ===========================
-   Header
-   =========================== */
-.site-header {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
-  color: #ffffff;
-  text-align: center;
-  padding: 3rem 2rem 2rem;
-  border-radius: 0 0 12px 12px;
+/* Focus gostergesi -- ASLA kaldirma */
+:focus {
+  outline: 2px solid #2563EB;
+  outline-offset: 2px;
 }
 
-.site-header h1 {
-  font-size: 2.2rem;
-  margin-bottom: 0.25rem;
-  letter-spacing: -0.5px;
+/* Section & Header aralari */
+header,
+section,
+footer {
+  margin-bottom: 2rem;
 }
 
-.site-header .subtitle {
-  font-size: 1.1rem;
-  opacity: 0.9;
-  margin-bottom: 1.5rem;
-}
-
-/* ===========================
-   Navigasyon
-   =========================== */
-.nav-list {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.nav-list a {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius);
-  transition: background-color 0.2s ease;
-}
-
-.nav-list a:hover,
-.nav-list a:focus {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* ===========================
-   Main & Sections
-   =========================== */
-main {
-  padding: 2rem 1.5rem;
-}
-
-section {
-  margin-bottom: 3rem;
-  background: var(--color-surface);
-  padding: 2rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-section h2 {
-  font-size: 1.6rem;
-  color: var(--color-primary);
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--color-border);
-}
-
-section h3 {
-  font-size: 1.2rem;
-  color: var(--color-text);
-  margin-bottom: 0.5rem;
-  margin-top: 1rem;
-}
-
-section h4 {
-  font-size: 1rem;
-  color: var(--color-text-muted);
-  margin-bottom: 0.35rem;
-  margin-top: 0.75rem;
-}
-
-/* ===========================
-   Hakkımda
-   =========================== */
-.hakkimda-content {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.profil-figure {
-  text-align: center;
-  flex-shrink: 0;
-}
-
-.profil-img {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--color-primary-light);
-  box-shadow: var(--shadow);
-}
-
-.profil-figure figcaption {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
-  font-style: italic;
-}
-
-.hakkimda-text {
-  flex: 1;
-  min-width: 250px;
-}
-
-.hakkimda-text p {
-  margin-bottom: 1rem;
-  line-height: 1.7;
-}
-
-.tech-list {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.tech-list li {
-  background: #eff6ff;
-  color: var(--color-primary);
-  padding: 0.35rem 0.85rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  border: 1px solid #bfdbfe;
-}
-
-/* ===========================
-   Projeler
-   =========================== */
-.projeler-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.proje-card {
-  background: var(--color-bg);
-  padding: 1.5rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--color-border);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.proje-card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
-}
-
-.proje-card h3 {
-  margin-top: 0;
-  color: var(--color-primary);
-}
-
-.proje-card p {
-  color: var(--color-text-muted);
-  margin-bottom: 0.75rem;
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-.proje-card ul {
-  list-style: disc;
-  padding-left: 1.25rem;
-  color: var(--color-text);
-  font-size: 0.9rem;
-}
-
-.proje-card ul li {
-  margin-bottom: 0.25rem;
-}
-
-/* ===========================
-   Form
-   =========================== */
-fieldset {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-}
-
-legend {
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: var(--color-primary);
-  padding: 0 0.5rem;
-}
-
+/* Form stilleri */
 .form-group {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 label {
   display: block;
-  margin-bottom: 0.35rem;
-  font-weight: 500;
-  color: var(--color-text);
+  margin-bottom: 0.25rem;
 }
 
 input,
 textarea,
 select {
   width: 100%;
-  padding: 0.65rem 0.85rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  font-size: 1rem;
-  font-family: inherit;
-  color: var(--color-text);
-  background: var(--color-surface);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-}
-
-input[aria-invalid="true"],
-textarea[aria-invalid="true"],
-select[aria-invalid="true"] {
-  border-color: var(--color-error);
-}
-
-input[aria-invalid="true"]:focus,
-textarea[aria-invalid="true"]:focus,
-select[aria-invalid="true"]:focus {
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
-}
-
-textarea {
-  resize: vertical;
-  min-height: 100px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .error-msg {
-  display: block;
-  color: var(--color-error);
+  color: red;
   font-size: 0.85rem;
-  min-height: 1.2em;
-  margin-top: 0.25rem;
 }
 
-.success-msg {
-  background: #f0fdf4;
-  color: var(--color-success);
-  padding: 1rem;
-  border-radius: var(--radius);
-  border: 1px solid #bbf7d0;
-  margin-bottom: 1.5rem;
-  font-weight: 500;
+/* Figure stilleri */
+figure {
+  margin: 1rem 0;
   text-align: center;
 }
 
-button[type="submit"] {
-  background: var(--color-primary);
-  color: #ffffff;
-  padding: 0.75rem 2rem;
-  border: none;
-  border-radius: var(--radius);
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  width: 100%;
-  margin-top: 0.5rem;
+img {
+  max-width: 150px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
 }
 
-button[type="submit"]:hover {
-  background: var(--color-accent);
-}
-
-button[type="submit"]:active {
-  transform: scale(0.98);
-}
-
-/* ===========================
-   Footer
-   =========================== */
-.site-footer {
-  text-align: center;
-  padding: 1.5rem 2rem;
-  background: var(--color-primary);
-  color: rgba(255, 255, 255, 0.85);
-  border-radius: 12px 12px 0 0;
+figcaption {
   font-size: 0.9rem;
+  color: #666;
 }
 
-.site-footer p {
-  margin-bottom: 0.25rem;
+/* Proje kartlari */
+article {
+  border: 1px solid #eee;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
 }
 
-/* ===========================
-   Responsive
-   =========================== */
-@media (max-width: 600px) {
-  .site-header h1 {
-    font-size: 1.6rem;
-  }
-
-  .hakkimda-content {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .hakkimda-text {
-    min-width: auto;
-  }
-
-  section {
-    padding: 1.25rem;
-  }
-
-  main {
-    padding: 1rem;
-  }
+article img {
+  border-radius: 0;
+  max-width: 100%;
+  height: auto;
+  margin-top: 0.5rem;
 }
