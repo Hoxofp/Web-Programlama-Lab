@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect width="400" height="400" fill="#3B82F6" rx="200"/>
+  <circle cx="200" cy="150" r="70" fill="#ffffff" opacity="0.9"/>
+  <ellipse cx="200" cy="340" rx="110" ry="100" fill="#ffffff" opacity="0.9"/>
+  <text x="200" y="395" text-anchor="middle" fill="#1E3A8A" font-family="system-ui, sans-serif" font-size="14" font-weight="600">AME</text>
+</svg>
