@@ -18,16 +18,16 @@ function App() {
             </header>
 
             <main id="main-content">
-                <h1>Ahmet Mervan Erman - Kisisel Portfolyo</h1>
+                <h1>Eylül Can Kesici - Kisisel Portfolyo</h1>
 
                 <section id="hakkimda">
                     <h2>Hakkimda</h2>
                     <figure>
-                        <img src="/profil.svg" alt="Ahmet Mervan Erman'in vesikalik fotografi" />
-                        <figcaption>Ahmet Mervan Erman</figcaption>
+                        <img src="/image.png" alt="Eylül Can Kesici'in vesikalik fotografi" />
+                        <figcaption>Eylül Can Kesici</figcaption>
                     </figure>
                     <p>
-                        Merhaba! Ben Ahmet Mervan Erman, 235541061 numarali ogrenciyim.
+                        Merhaba! Ben Eylül Can Kesici, 235542003 numarali ogrenciyim.
                         Web Tasarimi ve Programlama dersi kapsaminda modern web teknolojileri ogreniyorum.
                     </p>
                     <ul>
@@ -113,7 +113,7 @@ function App() {
             </main>
 
             <footer>
-                <p>&copy; 2025 Ahmet Mervan Erman. Tum haklari saklidir.</p>
+                <p>&copy; 2025 Eylül Can Kesici. Tum haklari saklidir.</p>
             </footer>
         </>
     )
