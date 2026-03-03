@@ -8,6 +8,7 @@ function App() {
             </a>
 
             <header>
+                <span className="site-title">Ahmet Mervan Erman</span>
                 <nav aria-label="Ana navigasyon">
                     <ul>
                         <li><a href="#hakkimda">Hakkimda</a></li>
@@ -18,37 +19,67 @@ function App() {
             </header>
 
             <main id="main-content">
-                <h1>Eylül Can Kesici - Kisisel Portfolyo</h1>
+                <h1>Ahmet Mervan Erman - Kisisel Portfolyo</h1>
 
                 <section id="hakkimda">
                     <h2>Hakkimda</h2>
-                    <figure>
-                        <img src="/image.png" alt="Eylül Can Kesici'in vesikalik fotografi" />
-                        <figcaption>Eylül Can Kesici</figcaption>
-                    </figure>
-                    <p>
-                        Merhaba! Ben Eylül Can Kesici, 235542003 numarali ogrenciyim.
-                        Web Tasarimi ve Programlama dersi kapsaminda modern web teknolojileri ogreniyorum.
-                    </p>
-                    <ul>
-                        <li>React 18</li>
-                        <li>TypeScript</li>
-                        <li>Vite</li>
-                    </ul>
+                    <div className="about-content">
+                        <figure>
+                            <img src="/image.png" alt="Ahmet Mervan Erman'in vesikalik fotografi" />
+                            <figcaption>Ahmet Mervan Erman</figcaption>
+                        </figure>
+                        <div>
+                            <p>
+                                Merhaba! Ben Ahmet Mervan Erman, 235541061 numarali ogrenciyim.
+                                Web Tasarimi ve Programlama dersi kapsaminda modern web teknolojileri ogreniyorum.
+                            </p>
+                            <ul className="skill-tags" role="list" aria-label="Beceri etiketleri">
+                                <li>HTML5</li>
+                                <li>CSS3</li>
+                                <li>JavaScript</li>
+                                <li>React</li>
+                                <li>TypeScript</li>
+                                <li>Git</li>
+                            </ul>
+                        </div>
+                    </div>
                 </section>
 
                 <section id="projeler">
                     <h2>Projelerim</h2>
-                    <article>
-                        <h3>Proje 1: Hello World</h3>
-                        <p>LAB-1 kapsaminda yapilan ilk React projesi.</p>
-                        <img src="https://via.placeholder.com/150" alt="LAB-1 ekran goruntusu" />
-                    </article>
-                    <article>
-                        <h3>Proje 2: Semantik Portfolyo</h3>
-                        <p>LAB-2 kapsaminda yapilan semantik ve erisilebilir web sayfasi.</p>
-                        <img src="https://via.placeholder.com/150" alt="LAB-2 ekran goruntusu" />
-                    </article>
+                    <div className="project-grid">
+                        <article className="project-card">
+                            <img src="https://via.placeholder.com/400x200" alt="LAB-1 ekran goruntusu" />
+                            <h3>Proje 1: Hello World</h3>
+                            <p>LAB-1 kapsaminda yapilan ilk React projesi.</p>
+                            <ul className="skill-tags">
+                                <li>React</li>
+                                <li>Vite</li>
+                            </ul>
+                        </article>
+
+                        <article className="project-card">
+                            <img src="https://via.placeholder.com/400x200" alt="LAB-2 ekran goruntusu" />
+                            <h3>Proje 2: Semantik Portfolyo</h3>
+                            <p>LAB-2 kapsaminda yapilan semantik ve erisilebilir web sayfasi.</p>
+                            <ul className="skill-tags">
+                                <li>HTML5</li>
+                                <li>CSS3</li>
+                                <li>A11y</li>
+                            </ul>
+                        </article>
+
+                        <article className="project-card">
+                            <img src="https://via.placeholder.com/400x200" alt="LAB-3 ekran goruntusu" />
+                            <h3>Proje 3: Responsive Tasarim</h3>
+                            <p>LAB-3 kapsaminda modern CSS, Flexbox ve Grid ile responsive portfolyo.</p>
+                            <ul className="skill-tags">
+                                <li>Flexbox</li>
+                                <li>Grid</li>
+                                <li>Responsive</li>
+                            </ul>
+                        </article>
+                    </div>
                 </section>
 
                 <section id="iletisim">
@@ -113,7 +144,7 @@ function App() {
             </main>
 
             <footer>
-                <p>&copy; 2025 Eylül Can Kesici. Tum haklari saklidir.</p>
+                <p>&copy; 2025 Ahmet Mervan Erman. Tum haklari saklidir.</p>
             </footer>
         </>
     )
