@@ -1,11 +1,54 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import type { Category, SortField, SortOrder } from './types/project'
+import { fetchProjects } from './services/projectService'
+import { applyFilters } from './utils/projectHelpers'
 import Button from './components/Button'
 import Input from './components/Input'
 import Card from './components/Card'
+import Alert from './components/Alert'
 import UIKit from './pages/UIKit'
 
 function App() {
     const [showUIKit, setShowUIKit] = useState(false)
+
+    // --- LAB-5 STATE ---
+    const [projects, setProjects] = useState<import('./types/project').Project[]>([])
+    const [search, setSearch] = useState("")
+    const [category, setCategory] = useState<Category | "all">("all")
+    const [sortField, setSortField] = useState<SortField>("year")
+    const [sortOrder, setSortOrder] = useState<SortOrder>("desc")
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
+    // --- VERI CEKME ---
+    useEffect(() => {
+        async function load() {
+            try {
+                setLoading(true)
+                setError(null)
+                const data = await fetchProjects()
+                setProjects(data)
+            } catch (err) {
+                setError(
+                    err instanceof Error
+                        ? err.message
+                        : "Bilinmeyen hata"
+                )
+            } finally {
+                setLoading(false)
+            }
+        }
+        load()
+    }, [])
+
+    // --- TURETILMIS (DERIVED) VERI ---
+    const filtered = applyFilters(
+        projects, search, category,
+        sortField, sortOrder
+    )
+
+    const categories: (Category | "all")[] =
+        ["all", "frontend", "fullstack", "backend"]
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors">
@@ -133,48 +176,103 @@ function App() {
                                 <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-10">
                                     Projelerim
                                 </h2>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    <Card
-                                        variant="elevated"
-                                        title="Proje 1: Hello World"
-                                        image="https://via.placeholder.com/400x200"
-                                        imageAlt="LAB-1 ekran goruntusu"
-                                    >
-                                        <p>LAB-1 kapsaminda yapilan ilk React projesi.</p>
-                                        <div className="flex flex-wrap gap-1 mt-2">
-                                            <span className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-0.5 rounded text-xs">React</span>
-                                            <span className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-0.5 rounded text-xs">Vite</span>
-                                        </div>
-                                    </Card>
 
-                                    <Card
-                                        variant="elevated"
-                                        title="Proje 2: Semantik Portfolyo"
-                                        image="https://via.placeholder.com/400x200"
-                                        imageAlt="LAB-2 ekran goruntusu"
-                                    >
-                                        <p>LAB-2 kapsaminda yapilan semantik ve erisilebilir web sayfasi.</p>
-                                        <div className="flex flex-wrap gap-1 mt-2">
-                                            <span className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-0.5 rounded text-xs">HTML5</span>
-                                            <span className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-0.5 rounded text-xs">CSS3</span>
-                                            <span className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-0.5 rounded text-xs">A11y</span>
-                                        </div>
-                                    </Card>
+                                {/* HATA DURUMU */}
+                                {error && (
+                                    <Alert variant="error" title="Hata">
+                                        {error}
+                                    </Alert>
+                                )}
 
-                                    <Card
-                                        variant="elevated"
-                                        title="Proje 3: Responsive Tasarim"
-                                        image="https://via.placeholder.com/400x200"
-                                        imageAlt="LAB-3 ekran goruntusu"
-                                    >
-                                        <p>LAB-3 kapsaminda modern CSS, Flexbox ve Grid ile responsive portfolyo.</p>
-                                        <div className="flex flex-wrap gap-1 mt-2">
-                                            <span className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-0.5 rounded text-xs">Flexbox</span>
-                                            <span className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-0.5 rounded text-xs">Grid</span>
-                                            <span className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-2 py-0.5 rounded text-xs">Responsive</span>
-                                        </div>
-                                    </Card>
+                                {/* FILTRELER */}
+                                <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                                    <Input
+                                        id="search"
+                                        placeholder="Proje ara..."
+                                        value={search}
+                                        onChange={e => setSearch(e.target.value)}
+                                    />
+
+                                    <div className="flex gap-2 flex-wrap">
+                                        {categories.map(cat => (
+                                            <Button
+                                                key={cat}
+                                                variant={category === cat ? "primary" : "ghost"}
+                                                size="sm"
+                                                onClick={() => setCategory(cat)}
+                                            >
+                                                {cat === "all" ? "Tumu" : cat}
+                                            </Button>
+                                        ))}
+                                    </div>
+
+                                    <div className="flex gap-2">
+                                        <select
+                                            value={sortField}
+                                            onChange={e => setSortField(e.target.value as SortField)}
+                                            className="border rounded-lg px-3 py-2 dark:bg-gray-800 dark:text-white dark:border-gray-600"
+                                        >
+                                            <option value="year">Yil</option>
+                                            <option value="title">Baslik</option>
+                                        </select>
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            onClick={() => setSortOrder(o => o === "asc" ? "desc" : "asc")}
+                                        >
+                                            {sortOrder === "asc" ? "↑ A-Z" : "↓ Z-A"}
+                                        </Button>
+                                    </div>
                                 </div>
+
+                                {/* YUKLENIYOR */}
+                                {loading && (
+                                    <p className="text-center text-gray-500">
+                                        Yukleniyor...
+                                    </p>
+                                )}
+
+                                {/* BOS SONUC */}
+                                {!loading && filtered.length === 0 && (
+                                    <p className="text-center text-gray-500">
+                                        Eslesen proje bulunamadi.
+                                    </p>
+                                )}
+
+                                {/* PROJE LISTESI */}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {filtered.map(project => (
+                                        <Card
+                                            key={project.id}
+                                            variant="elevated"
+                                            title={project.title}
+                                            image={project.image}
+                                            imageAlt={`${project.title} ekran goruntusu`}
+                                        >
+                                            <p className="text-sm mb-3">
+                                                {project.description}
+                                            </p>
+                                            <div className="flex flex-wrap gap-1">
+                                                {project.tech.map(t => (
+                                                    <span
+                                                        key={t}
+                                                        className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs px-2 py-0.5 rounded-full"
+                                                    >
+                                                        {t}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                            <p className="text-xs text-gray-400 mt-2">
+                                                {project.year} &middot; {project.category}
+                                            </p>
+                                        </Card>
+                                    ))}
+                                </div>
+
+                                {/* SONUC SAYISI */}
+                                <p className="text-sm text-gray-500 mt-4 text-center">
+                                    {filtered.length} / {projects.length} proje gosteriliyor
+                                </p>
                             </div>
                         </section>
 
